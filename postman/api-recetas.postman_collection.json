@@ -1,0 +1,176 @@
+{
+  "info": {
+    "name": "API Recetas - CRUD",
+    "description": "Colección CRUD de recetas para api-recetas (NestJS + PostgreSQL).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "recipeId",
+      "value": "1"
+    },
+    {
+      "key": "imagePath",
+      "value": "C:/ruta/a/tu/imagen.jpg"
+    }
+  ],
+  "item": [
+    {
+      "name": "1 - GET all recipes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/recipes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "recipes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2 - POST create recipe",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Sopa de tomate\",\n  \"descripcion\": \"Sopa casera rápida\",\n  \"ingredientes\": \"tomate,agua,sal\",\n  \"tiempo_min\": 15,\n  \"dificultad\": \"facil\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/recipes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "recipes"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201/200', function () {",
+              "  pm.expect([200, 201]).to.include(pm.response.code);",
+              "});",
+              "",
+              "const json = pm.response.json();",
+              "if (json && json.id) {",
+              "  pm.collectionVariables.set('recipeId', String(json.id));",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "3 - POST upload recipe image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "{{imagePath}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}/image",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "recipes",
+            "{{recipeId}}",
+            "image"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4 - GET recipe by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "recipes",
+            "{{recipeId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5 - PATCH update recipe",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tiempo_min\": 18\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "recipes",
+            "{{recipeId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6 - DELETE recipe",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/recipes/{{recipeId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "recipes",
+            "{{recipeId}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

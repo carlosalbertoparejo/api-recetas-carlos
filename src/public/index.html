@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>API Recetas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Gestor de Recetas</h1>
+
+  <div id="actions">
+    <button class="action-btn" onclick="loadRecipes()">GET all recipes</button>
+    <button class="action-btn" onclick="showCreateForm()">POST create recipe</button>
+    <button class="action-btn" onclick="showUploadForm()">POST upload image</button>
+    <button class="action-btn" onclick="showGetByIdForm()">GET recipe by ID</button>
+    <button class="action-btn" onclick="showUpdateForm()">PATCH update recipe</button>
+    <button class="action-btn" onclick="showDeleteForm()">DELETE recipe</button>
+  </div>
+
+  <div id="form-container"></div>
+
+  <div id="recipes-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

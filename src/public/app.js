@@ -53,14 +53,11 @@ function showCreateForm() {
     </form>
     `;
 
-    // 🔥 IMPORTANTE: estas dos líneas deben ir justo después de insertar el formulario
     const slider = document.getElementById("tiempo_min");
     const label = document.getElementById("tiempo_valor");
 
-    // Valor inicial sincronizado
     label.textContent = slider.value;
 
-    // Actualizar al mover la barra
     slider.oninput = () => {
         label.textContent = slider.value;
     };
